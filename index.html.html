@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>致王阡玫：见字如面</title>
+    <style>
+        /* 引入具有书卷气息的字体 */
+        @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;500&display=swap');
+
+        :root {
+            --rose-bg: #fdf7f7;
+            --soft-gold: #b89470;
+            --text-dark: #3a3a3a;
+            --accent-pink: #f8bbd0;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--rose-bg);
+            /* 细腻的背景底纹 */
+            background-image: radial-gradient(var(--accent-pink) 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            font-family: 'Noto Serif SC', serif;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* 音乐唱片机图标 */
+        #music-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            cursor: pointer;
+            border: 2px solid var(--soft-gold);
+        }
+
+        .playing {
+            animation: rotateDisk 4s linear infinite;
+        }
+
+        @keyframes rotateDisk {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 信件容器 */
+        .letter-container {
+            width: 90%;
+            max-width: 550px;
+            background: #ffffff;
+            margin: 60px 0;
+            padding: 50px 30px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.06);
+            border-radius: 4px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: letterSlideUp 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes letterSlideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 顶部装饰 */
+        .decoration {
+            text-align: center;
+            color: var(--soft-gold);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Ma Shan Zheng', cursive;
+            text-align: center;
+            font-weight: normal;
+            font-size: 2em;
+            color: var(--soft-gold);
+            margin: 0 0 40px 0;
+            letter-spacing: 4px;
+        }
+
+        .content {
+            line-height: 2.4;
+            font-size: 1.05em;
+            text-align: justify;
+        }
+
+        p { margin-bottom: 2em; text-indent: 2em; }
+        .no-indent { text-indent: 0; font-weight: 500; }
+
+        .highlight {
+            color: #d81b60;
+            border-bottom: 1px dashed var(--accent-pink);
+            padding-bottom: 2px;
+        }
+
+        /* 落款样式 */
+        .footer {
+            margin-top: 60px;
+            text-align: right;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 25px;
+        }
+
+        .signature {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.2em;
+            color: var(--soft-gold);
+            margin-bottom: 8px;
+        }
+
+        .date { font-size: 0.9em; color: #aaa; letter-spacing: 1px; }
+
+        /* 浪漫星尘效果 */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            animation: fallAnimation linear forwards;
+        }
+
+        @keyframes fallAnimation {
+            to { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 背景音乐：三叶的主题曲 (Mitsuha's Theme) -->
+    <!-- 这是一个公共音频链接，如果失效建议下载后放在同目录下引用 local mitsuha.mp3 -->
+    <audio id="bgMusic" loop>
+        <source src="https://api.p6p.net/music/mitsuha_theme.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="music-btn" onclick="toggleMusic()">
+        <span id="music-icon">🎵</span>
+    </div>
+
+    <div class="letter-container">
+        <div class="decoration">✧</div>
+        <h1>见字如面</h1>
+        
+        <div class="content">
+            <div class="no-indent">你好呀，朋友。</div>
+            
+            <p>知道你不喜欢小作文，本来想着唱首歌表达歉意，最后还是作罢了。</p>
+            <p>思来想去，我也没什么别的才华，只会敲敲代码，所以最终还是用这种方式跟你道歉。</p>
+            <p>首先，谢谢你一直以来的耐心与包容。我一直以为，工作之后我已经改掉了和女生聊天会紧张的毛病。毕竟现在开会、处理工作我都能独当一面，舌战群儒，可偏偏遇到你，<span class="highlight">好像瞬间就被打回了原形</span>。</p>
+            
+            <p>很多本该主动给到的关心和体贴，都要等你提醒我才能反应过来。哈哈，你说得没错，我确实是个笨蛋。但你总会温柔指正我的不足，还一次次选择原谅我，所以我心里一直欠你一句郑重的道歉。</p>
+            
+            <p>今天我走完了最后一轮面试，这段日子，我真的过得特别煎熬。考研前夕奶奶离世，考研时数学发挥失常，最后调剂到了杭电。读研期间被导师压榨，迟迟不放我出去实习。身为学硕还有发文章的硬性要求，导师却全程零指导，最后磕磕绊绊，好在延毕之前将3篇文章发表。</p>
+            
+            <p>身边的朋友陆续入职华为、小米这些大厂，而我只能先随便找了一家公司落脚。毕业前，总有人跟我说：“刘文，以你的实力，本该去大厂的。”工作之后，同事也说，我不属于这里。</p>
+            
+            <p>所以我下定决心，想重新证明自己一次。可求职的过程格外坎坷，仅有不到一年的工作经验，社招几乎处处碰壁。从笔试、技术一面、技术二面、技术加面，再到主管面、HR面，一路过关斩将，步步艰难。</p>
+            
+            <p>这段时间里，工作上也不顺心，领导刻意拿我的薪资说事，挑动矛盾，很多事情让我莫名背锅，绩效也被打了C……好几次我都快要坚持不下去，你像一颗星星，忽然的出现，<span class="highlight">照亮了我前行的路</span>。</p>
+            
+            <p>AI小真是我字节的同学推荐的，于是我抱着试一试的心态，填写了自己的个人信息。没想到真的会有女生回应，刚建群的时候我其实惊慌失措，后来才发现，所有担心都是多余的。</p>
+            
+            <p>初次和你相识那天，是我刚结束技术一面，心里满是失落沮丧。就在这个时候，你出现了。你假装HR和我聊天，我过得特别开心。</p>
+            
+            <p>后来到了母亲节，我没能察觉到你那天心情低落，还自顾自和你分享钓鱼的趣事，也谢谢你当时还耐心回复我。你也是第一个愿意和我分享烦心事的异性朋友，只可惜我安慰人的方式太过笨拙。</p>
+            
+            <p>这段时间里，每一轮面试，你都有鼓励，我的每一次进步和顺利通关，都离不开你的支持。每每遇到手撕代码写不出来、快要放弃的时候，我都会默默给自己打气：一定要坚持，<span class="highlight">不能让你失望</span>。</p>
+            
+            <p>那天因为分心和你闲聊，忽略了很多事情，惹你生了气，这件事我一直记在心里，欠你一句道歉。你当初说等我拿到offer，再一起弥补。</p>
+            
+            <p>如今主管面已经结束，也到了该认真道歉的时候，希望你能原谅我的迟钝与笨拙。</p>
+            
+            <p>最后想对你说，和你聊天从来不用刻意找话题，自在又舒服，像山间缓缓流淌的暖流。</p>
+            <p class="no-indent">真的很高兴认识你，王阡玫。</p>
+        </div>
+
+        <div class="footer">
+            <div class="signature">刘文</div>
+            <div class="date">2026年5月14日</div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        const btn = document.getElementById('music-btn');
+        const icon = document.getElementById('music-icon');
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                btn.classList.add('playing');
+                icon.innerHTML = '💿';
+            } else {
+                audio.pause();
+                btn.classList.remove('playing');
+                icon.innerHTML = '🎵';
+            }
+        }
+
+        // 交互逻辑：用户第一次点击页面任何地方即开始播放
+        document.addEventListener('click', function() {
+            if(audio.paused) toggleMusic();
+        }, {once: true});
+
+        // 浪漫星尘特效
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // 随机星尘形状
+            const shapes = ['❤', '✦', '✿', '❀'];
+            particle.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
+            
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = '-5vh';
+            particle.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            particle.style.color = 'rgba(212, 163, 115, ' + (Math.random() * 0.5 + 0.2) + ')';
+            
+            const duration = Math.random() * 3 + 4;
+            particle.style.animationDuration = duration + 's';
+            
+            document.body.appendChild(particle);
+            setTimeout(() => { particle.remove(); }, duration * 1000);
+        }
+
+        setInterval(createParticle, 400);
+    </script>
+</body>
+</html>
