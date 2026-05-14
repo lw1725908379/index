@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -130,25 +129,13 @@
 
         .date { font-size: 0.9em; color: #aaa; letter-spacing: 1px; }
 
-        /* 浪漫星尘效果 */
-        .particle {
-            position: fixed;
-            pointer-events: none;
-            z-index: 999;
-            animation: fallAnimation linear forwards;
-        }
-
-        @keyframes fallAnimation {
-            to { transform: translateY(105vh) rotate(360deg); opacity: 0; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- 背景音乐：三叶的主题曲 (Mitsuha's Theme) -->
-    <!-- 这是一个公共音频链接，如果失效建议下载后放在同目录下引用 local mitsuha.mp3 -->
+    <!-- 背景音乐：建议将 MP3 文件命名为 mitsuha.mp3 放在 index.html 同目录下上传至 Vercel -->
     <audio id="bgMusic" loop>
-        <source src="https://api.p6p.net/music/mitsuha_theme.mp3" type="audio/mpeg">
+        <source src="mitsuha.mp3" type="audio/mpeg">
     </audio>
 
     <div id="music-btn" onclick="toggleMusic()">
@@ -188,7 +175,7 @@
             
             <p>如今主管面已经结束，也到了该认真道歉的时候，希望你能原谅我的迟钝与笨拙。</p>
             
-            <p>最后想对你说，和你聊天从来不用刻意找话题，自在又舒服，像山间缓缓流淌的暖流。</p>
+            <p>最后想对欲，和你聊天从来不用刻意找话题，自在又舒服，像山间缓缓流淌的暖流。</p>
             <p class="no-indent">真的很高兴认识你，王阡玫。</p>
         </div>
 
@@ -219,29 +206,6 @@
         document.addEventListener('click', function() {
             if(audio.paused) toggleMusic();
         }, {once: true});
-
-        // 浪漫星尘特效
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            
-            // 随机星尘形状
-            const shapes = ['❤', '✦', '✿', '❀'];
-            particle.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
-            
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.top = '-5vh';
-            particle.style.fontSize = (Math.random() * 15 + 10) + 'px';
-            particle.style.color = 'rgba(212, 163, 115, ' + (Math.random() * 0.5 + 0.2) + ')';
-            
-            const duration = Math.random() * 3 + 4;
-            particle.style.animationDuration = duration + 's';
-            
-            document.body.appendChild(particle);
-            setTimeout(() => { particle.remove(); }, duration * 1000);
-        }
-
-        setInterval(createParticle, 400);
     </script>
 </body>
 </html>
