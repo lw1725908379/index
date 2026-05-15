@@ -189,23 +189,39 @@
         const audio = document.getElementById('bgMusic');
         const btn = document.getElementById('music-btn');
         const icon = document.getElementById('music-icon');
-
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play();
-                btn.classList.add('playing');
-                icon.innerHTML = '💿';
-            } else {
-                audio.pause();
-                btn.classList.remove('playing');
-                icon.innerHTML = '🎵';
+        
+        // 统一控制播放状态的函数
+        async function toggleMusic(e) {
+            if (e) e.stopPropagation(); // 阻止事件冒泡，防止重复触发
+            
+            try {
+                if (audio.paused) {
+                    await audio.play();
+                    btn.classList.add('playing');
+                    icon.innerHTML = '💿';
+                } else {
+                    audio.pause();
+                    btn.classList.remove('playing');
+                    icon.innerHTML = '🎵';
+                }
+            } catch (err) {
+                console.log("播放被拦截或中断:", err);
             }
         }
-
+        
         // 交互逻辑：用户第一次点击页面任何地方即开始播放
         document.addEventListener('click', function() {
-            if(audio.paused) toggleMusic();
-        }, {once: true});
+            if (audio.paused) {
+                toggleMusic();
+            }
+        }, { once: true });
+        
+        // 针对移动端触摸的兼容
+        document.addEventListener('touchstart', function() {
+            if (audio.paused) {
+                toggleMusic();
+            }
+        }, { once: true });
     </script>
 </body>
 </html>
